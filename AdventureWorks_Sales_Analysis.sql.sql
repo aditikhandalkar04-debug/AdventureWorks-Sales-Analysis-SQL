@@ -9,7 +9,7 @@ SELECT 2017 as Year,  sum(orderquantity) as Totalquantity
 from adventureworks_sales_2017
 ORDER BY Year;
 
---Find the total sales amount for each year from 2015 to 2017.”
+2--Find the total sales amount for each year from 2015 to 2017.”
 SELECT 2015 AS year, SUM(p.productprice* s.orderquantity) as Totalamount
 FROM adventureworks_products p
 JOIN adventureworks_sales_2015 s
@@ -104,7 +104,7 @@ ORDER BY total_sales DESC
 LIMIT 10;
 
 
--- Top 10 Customers by Total Sales
+5-- “Customer Segmentation: Classify customers into High, Medium, and Low segments based on their total sales from 2015 to 2017.”
 WITH customer_sales as (
 	SELECT c.customerkey, c.firstname, c.lastname, SUM(p.productprice * s.orderquantity) as Total_sales
 	FROM adventureworks_customers c
@@ -171,7 +171,7 @@ ON p.productkey = s.productkey
 GROUP BY c.customerkey, c.firstname, c.lastname
 ),
 
---Q6. Customer Segmentation
+
 total_customer_sales AS(
 SELECT customerkey, firstname, lastname, SUM(total_sales) AS total_sales
 FROM totalsales
@@ -187,7 +187,7 @@ FROM total_customer_sales
 ORDER BY total_sales DESC;
 
 
--- Which product categories sold more than 5,000 units across all available sales?
+6-- Which product categories sold more than 5,000 units across all available sales?
 SELECT c.categoryname, SUM(s.orderquantity) as total_quantity
 FROM adventureworks_sales_2015 s
 JOIN adventureworks_products p
@@ -200,7 +200,7 @@ GROUP BY c.categoryname
 HAVING SUM(s.orderquantity) > 5000;
 
 
- -- Find the total sales amount for each country from 2015 to 2017 and display the countries in 
+7 -- Find the total sales amount for each country from 2015 to 2017 and display the countries in 
 --descending order of total sales
 WITH country_wise_sales AS (
     SELECT 
@@ -248,7 +248,7 @@ FROM country_wise_sales
 ORDER BY sales_year, total_sales DESC;
 
 
--- Find the top 10 customers based on the total number of products they purchased from 2015 to 2017.
+8-- Find the top 10 customers based on the total number of products they purchased from 2015 to 2017.
 SELECT customerkey,
        firstname,
        lastname,
@@ -297,7 +297,7 @@ GROUP BY p.productname
 ORDER BY Total_return DESC;
 
 
--- Which product categories have the highest return rate?
+9-- Which product categories have the highest return rate?
 
 WITH sold_quantity AS (
 SELECT c.categoryname, SUM(s.orderquantity) AS total_sold
